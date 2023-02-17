@@ -12,7 +12,9 @@
       </li>
     </ul>
 
-    <button @click="excluirTodasConcluidas">Deletar tudo</button>
+    
+    <div v-if="todos.length == 0">Não existem tarefas concluídas</div>
+    <button v-if="todos.length !== 0" @click="excluirTodasConcluidas">Deletar tudo</button>
   </div>
 </template>
 

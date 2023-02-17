@@ -15,6 +15,7 @@
         <label>{{ todo.descricao }}</label>
       </li>
     </ul>
+    <div v-if="todos.length == 0">Não existem tarefas</div>
   </div>
 </template>
 
