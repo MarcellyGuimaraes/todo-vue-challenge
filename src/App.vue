@@ -23,6 +23,6 @@
 nav a.router-link-exact-active {
   /* padding: 0 3rem 2rem 3rem; */
   padding-bottom: 2rem;
-  border-bottom: 5px solid red;
+  border-bottom: 5px solid blue;
 }
 </style>
