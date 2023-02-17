@@ -4,6 +4,7 @@
     <form @submit.prevent="adicionarTarefa" class="flex items-center pb-5">
       <div class="relative w-full">
         <input
+          v-model="newTask"
           type="text"
           class="
             bg-gray-50
@@ -67,11 +68,6 @@ export default {
   computed: {
     ...mapState(["todos"]),
   },
-  data() {
-    return {
-      newTask: "",
-    };
-  },
   methods: {
     ...mapMutations(["TOGGLE_COMPLETED_TASK", "ADD_TASK"]),
     toggleComplete(id) {
@@ -81,6 +77,7 @@ export default {
       }
     },
     adicionarTarefa() {
+      console.log("Adicionar clicado");
       if (this.newTask) {
         this.ADD_TASK({
           id: this.todos.length + 1,

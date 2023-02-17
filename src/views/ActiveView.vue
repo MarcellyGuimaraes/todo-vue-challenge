@@ -3,6 +3,7 @@
     <form @submit.prevent="adicionarTarefa" class="flex items-center pb-5">
       <div class="relative w-full">
         <input
+          v-model="newTask"
           type="text"
           class="
             bg-gray-50
