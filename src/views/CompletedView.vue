@@ -1,11 +1,5 @@
 <template>
-    <h1>#todo</h1>
-    <ul>
-      <li>All</li>
-      <li>Active</li>
-      <li>Completed</li>
-      <hr/>
-
+  <div class="about">
       <form>
         <input type="text" placeholder="Add details"/>
         <button>Add</button>
@@ -13,26 +7,12 @@
 
       <ul>
         <li class="check">
-          <input type="checkbox">
-          <label>Teste...</label>
-        </li>
-        <li class="check">
-          <input type="checkbox">
-          <label>Teste...</label>
-        </li>
-        <li class="check">
-          <input type="checkbox">
-          <label>Teste...</label>
+          <input type="checkbox" checked>
+          <label>Teste... 2</label>
         </li>
       </ul>
-    </ul>
+  </div>
 </template>
-
-<script>
-export default {
-  name: 'HelloWorld',
-}
-</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

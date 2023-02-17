@@ -1,10 +1,4 @@
 <template>
-    <h1>#todo</h1>
-    <ul>
-      <li>All</li>
-      <li>Active</li>
-      <li>Completed</li>
-      <hr/>
 
       <form>
         <input type="text" placeholder="Add details"/>
@@ -14,18 +8,17 @@
       <ul>
         <li class="check">
           <input type="checkbox">
-          <label>Teste...</label>
+          <label>Teste... 1</label>
+        </li>
+        <li class="check">
+          <input type="checkbox" checked>
+          <label>Teste... 2</label>
         </li>
         <li class="check">
           <input type="checkbox">
-          <label>Teste...</label>
-        </li>
-        <li class="check">
-          <input type="checkbox">
-          <label>Teste...</label>
+          <label>Teste... 3</label>
         </li>
       </ul>
-    </ul>
 </template>
 
 <script>
