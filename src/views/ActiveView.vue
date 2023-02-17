@@ -1,9 +1,9 @@
 <template>
   <div class="active">
-      <form>
-        <input type="text" placeholder="Add details"/>
-        <button>Add</button>
-      </form>
+      <form @submit.prevent="adicionarTarefa">
+      <input v-model="newTask" type="text" placeholder="Add details" />
+      <button type="submit">Add</button>
+    </form>
 
       <ul>
     <li v-for="todo in todos" :key="todo.id" class="check">
@@ -23,10 +23,20 @@ export default {
     })
   },
   methods: {
-    ...mapMutations(['TOGGLE_COMPLETED_TASK']),
+    ...mapMutations(['TOGGLE_COMPLETED_TASK', 'ADD_TASK']),
     toggleComplete(todo) {
       this.TOGGLE_COMPLETED_TASK({ id: todo.id, completed: !todo.completed })
-    }
+    },
+     adicionarTarefa() {
+      if (this.newTask) {
+        this.ADD_TASK({
+          id: this.todos.length + 1,
+          descricao: this.newTask,
+          completed: false,
+        });
+        this.newTask = "";
+      }
+    },
   }
 }
 </script>
