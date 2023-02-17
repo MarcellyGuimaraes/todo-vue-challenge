@@ -1,27 +1,72 @@
 <template>
-  <div class="active">
-      <form @submit.prevent="adicionarTarefa">
-      <input v-model="newTask" type="text" placeholder="Add details" />
-      <button type="submit">Add</button>
+  <div class="active pt-7">
+    <form @submit.prevent="adicionarTarefa" class="flex items-center pb-5">
+      <div class="relative w-full">
+        <input
+          type="text"
+          class="
+            bg-gray-50
+            border border-gray-300
+            text-gray-900 text-sm
+            rounded-lg
+            focus:ring-blue-500 focus:border-blue-500
+            block
+            w-full
+            pl-10
+            p-2.5
+            dark:bg-gray-700
+            dark:border-gray-600
+            dark:placeholder-gray-400
+            dark:text-white
+            dark:focus:ring-blue-500
+            dark:focus:border-blue-500
+          "
+          placeholder="Search"
+          required
+        />
+      </div>
+      <button
+        type="submit"
+        class="
+          p-2.5
+          ml-2
+          text-sm
+          font-medium
+          text-white
+          bg-blue-700
+          rounded-lg
+          border border-blue-700
+          hover:bg-blue-800
+          focus:ring-4 focus:outline-none focus:ring-blue-300
+          dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800
+        "
+      >
+        Adicionar
+      </button>
     </form>
 
-      <ul>
-    <li v-for="todo in todos" :key="todo.id" class="check">
-        <input type="checkbox" :checked="todo.completed" @change="toggleComplete(todo)" />
-        <label>{{ todo.descricao }}</label>
+    <ul>
+      <li v-for="todo in todos" :key="todo.id" class="check pb-1">
+        <input
+          type="checkbox"
+          class="mr-3"
+          :checked="todo.completed"
+          @change="toggleComplete(todo)"
+        />
+        <label class="text-xl">{{ todo.descricao }}</label>
       </li>
-  </ul>
+    </ul>
     <div v-if="todos.length == 0">Não existem tarefas pendentes</div>
   </div>
 </template>
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations } from "vuex";
 
 export default {
   computed: {
     ...mapState({
-      todos: state => state.todos.filter(todo => !todo.completed)
-    })
+      todos: (state) => state.todos.filter((todo) => !todo.completed),
+    }),
   },
   data() {
     return {
@@ -29,11 +74,11 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(['TOGGLE_COMPLETED_TASK', 'ADD_TASK']),
+    ...mapMutations(["TOGGLE_COMPLETED_TASK", "ADD_TASK"]),
     toggleComplete(todo) {
-      this.TOGGLE_COMPLETED_TASK({ id: todo.id, completed: !todo.completed })
+      this.TOGGLE_COMPLETED_TASK({ id: todo.id, completed: !todo.completed });
     },
-     adicionarTarefa() {
+    adicionarTarefa() {
       if (this.newTask) {
         this.ADD_TASK({
           id: this.todos.length + 1,
@@ -43,28 +88,6 @@ export default {
         this.newTask = "";
       }
     },
-  }
-}
+  },
+};
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-
-.check {
-  display: block
-}
-</style>

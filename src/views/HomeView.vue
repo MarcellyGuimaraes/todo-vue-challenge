@@ -1,18 +1,59 @@
 
 <template>
-  <div>
-    <form @submit.prevent="adicionarTarefa">
-      <input v-model="newTask" type="text" placeholder="Add details" />
-      <button type="submit">Add</button>
+  <div class="pt-7">
+    <form @submit.prevent="adicionarTarefa" class="flex items-center pb-5">
+      <div class="relative w-full">
+        <input
+          type="text"
+          class="
+            bg-gray-50
+            border border-gray-300
+            text-gray-900 text-sm
+            rounded-lg
+            focus:ring-blue-500 focus:border-blue-500
+            block
+            w-full
+            pl-10
+            p-2.5
+            dark:bg-gray-700
+            dark:border-gray-600
+            dark:placeholder-gray-400
+            dark:text-white
+            dark:focus:ring-blue-500
+            dark:focus:border-blue-500
+          "
+          placeholder="Search"
+          required
+        />
+      </div>
+      <button
+        type="submit"
+        class="
+          p-2.5
+          ml-2
+          text-sm
+          font-medium
+          text-white
+          bg-blue-700
+          rounded-lg
+          border border-blue-700
+          hover:bg-blue-800
+          focus:ring-4 focus:outline-none focus:ring-blue-300
+          dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800
+        "
+      >
+        Adicionar
+      </button>
     </form>
     <ul>
-      <li class="check" v-for="todo in todos" :key="todo.id">
+      <li class="check pb-1" v-for="todo in todos" :key="todo.id">
         <input
           type="checkbox"
+          class="mr-3"
           :checked="todo.completed"
           @change="toggleComplete(todo.id)"
         />
-        <label>{{ todo.descricao }}</label>
+        <label class="text-xl">{{ todo.descricao }}</label>
       </li>
     </ul>
     <div v-if="todos.length == 0">Não existem tarefas</div>
@@ -52,24 +93,3 @@ export default {
   },
 };
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-
-.check {
-  display: block;
-}
-</style>

@@ -1,20 +1,61 @@
 <template>
-  <div class="about">
+  <div class="completed p-7">
     <ul>
-      <li v-for="todo in todos" :key="todo.id" class="check">
+      <li v-for="todo in todos" :key="todo.id" class="check pb-1">
         <input
           type="checkbox"
+          class="mr-3"
           :checked="todo.completed"
           @change="toggleComplete(todo)"
         />
-        <label>{{ todo.descricao }}</label>
-        <button @click="DELETE_TASK(todo.id)">deletar</button>
+        <label class="mr-4 text-xl">{{ todo.descricao }}</label>
+
+        <button
+          class="
+            focus:outline-none
+            text-white
+            bg-red-600
+            hover:bg-red-700
+            focus:ring-4 focus:ring-red-300
+            font-medium
+            rounded-lg
+            text-sm
+            px-5
+            py-2.5
+            mr-2
+            mb-2
+            dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900
+          "
+          @click="DELETE_TASK(todo.id)"
+        >
+          Deletar
+        </button>
       </li>
     </ul>
 
-    
     <div v-if="todos.length == 0">Não existem tarefas concluídas</div>
-    <button v-if="todos.length !== 0" @click="excluirTodasConcluidas">Deletar tudo</button>
+    <button
+      class="
+        focus:outline-none
+        text-white
+        bg-red-600
+        hover:bg-red-700
+        focus:ring-4 focus:ring-red-300
+        font-medium
+        rounded-lg
+        text-sm
+        px-5
+        py-2.5
+        mr-2
+        mb-2
+        mt-4
+        dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900
+      "
+      v-if="todos.length !== 0"
+      @click="excluirTodasConcluidas"
+    >
+      Deletar tudo
+    </button>
   </div>
 </template>
 
@@ -28,7 +69,11 @@ export default {
     }),
   },
   methods: {
-    ...mapMutations(["TOGGLE_COMPLETED_TASK", "DELETE_TASK", "DELETE_ALL_COMPLETED_TASKS"]),
+    ...mapMutations([
+      "TOGGLE_COMPLETED_TASK",
+      "DELETE_TASK",
+      "DELETE_ALL_COMPLETED_TASKS",
+    ]),
     toggleComplete(todo) {
       this.TOGGLE_COMPLETED_TASK({ id: todo.id, completed: !todo.completed });
     },
@@ -40,7 +85,7 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
+/* h3 {
   margin: 40px 0 0;
 }
 ul {
@@ -57,5 +102,5 @@ a {
 
 .check {
   display: block;
-}
+} */
 </style>
