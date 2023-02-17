@@ -6,33 +6,29 @@
       </form>
 
       <ul>
-    <li class="check" v-for="todo in incompleteTodos" :key="todo.id">
-      <input type="checkbox" :checked="todo.completed" @change="updateTodoStatus(todo)" />
-      <label>{{ todo.descricao }}</label>
-    </li>
+    <li v-for="todo in todos" :key="todo.id" class="check">
+        <input type="checkbox" :checked="todo.completed" @change="toggleCheck(todo)" />
+        <label>{{ todo.descricao }}</label>
+      </li>
   </ul>
   </div>
 </template>
 <script>
-import {todos} from "../components/data";
+import { mapState, mapMutations } from 'vuex';
 
 export default {
-  data() {
-    return {
-      todos: todos,
-    };
-  },
   computed: {
-    incompleteTodos() {
-      return this.todos.filter(todo => !todo.completed);
+    ...mapState({
+      todos: state => state.todos.filter(todo => !todo.completed)
+    })
+  },
+  methods: {
+    ...mapMutations(['setCompleted']),
+    toggleCheck(todo) {
+      this.setCompleted({ id: todo.id, completed: !todo.completed })
     }
-  },
-   methods: {
-    updateTodoStatus(todo) {
-      todo.completed = !todo.completed;
-    },
-  },
-};
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

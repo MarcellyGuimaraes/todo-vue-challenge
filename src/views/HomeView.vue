@@ -1,33 +1,51 @@
 
 <template>
   <div>
-    <form>
-    <input type="text" placeholder="Add details" />
-    <button>Add</button>
-  </form>
-
-  <ul>
-    <li class="check" v-for="todo in todos" :key="todo.id">
-      <input type="checkbox" :checked="todo.completed" />
-      <label>{{ todo.descricao }}</label>
-    </li>
-  </ul>
+    <form @submit.prevent="adicionarTarefa">
+      <input v-model="novaTarefa" type="text" placeholder="Add details" />
+      <button type="submit">Add</button>
+    </form>
+    <ul>
+      <li class="check" v-for="todo in todos" :key="todo.id">
+        <input
+          type="checkbox"
+          :checked="todo.completed"
+          @change="toggleCompleted(todo.id)"
+        />
+        <label>{{ todo.descricao }}</label>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import {todos} from "../components/data";
+import { mapState, mapMutations } from "vuex";
 
 export default {
-  name: "HelloWorld",
-  data() {
-    return {
-      todos: todos,
-    };
+  computed: {
+    ...mapState(["todos"]),
+  },
+  methods: {
+    ...mapMutations(["setCompleted", "addTarefa"]),
+    toggleCompleted(id) {
+      const todo = this.todos.find((todo) => todo.id === id);
+      if (todo) {
+        this.setCompleted({ id, completed: !todo.completed });
+      }
+    },
+    adicionarTarefa() {
+      if (this.novaTarefa) {
+        this.addTarefa({
+          id: this.todos.length + 1,
+          descricao: this.novaTarefa,
+          completed: false,
+        });
+        this.novaTarefa = "";
+      }
+    },
   },
 };
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {

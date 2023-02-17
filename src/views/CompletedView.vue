@@ -1,38 +1,37 @@
 <template>
   <div class="about">
     <ul>
-      <li class="check" v-for="todo in incompleteTodos" :key="todo.id">
+      <li v-for="todo in todos" :key="todo.id" class="check">
         <input
           type="checkbox"
           :checked="todo.completed"
-          @change="updateTodoStatus(todo)"
+          @change="toggleCheck(todo)"
         />
         <label>{{ todo.descricao }}</label>
-        <button>Deletar</button>
+        <button @click="excluirTarefa(todo.id)">deletar</button>
       </li>
     </ul>
 
-    <button>Deletar tudo</button>
+    <button @click="excluirTudo">Deletar tudo</button>
   </div>
 </template>
 
 <script>
-import { todos } from "../components/data";
+import { mapState, mapMutations } from "vuex";
 
 export default {
-  data() {
-    return {
-      todos: todos,
-    };
-  },
   computed: {
-    incompleteTodos() {
-      return this.todos.filter((todo) => todo.completed);
-    },
+    ...mapState({
+      todos: (state) => state.todos.filter((todo) => todo.completed),
+    }),
   },
   methods: {
-    updateTodoStatus(todo) {
-      todo.completed = !todo.completed;
+    ...mapMutations(["setCompleted", "excluirTarefa", "excluirTarefasConcluidas"]),
+    toggleCheck(todo) {
+      this.setCompleted({ id: todo.id, completed: !todo.completed });
+    },
+    excluirTudo() {
+      this.excluirTarefasConcluidas();
     },
   },
 };
