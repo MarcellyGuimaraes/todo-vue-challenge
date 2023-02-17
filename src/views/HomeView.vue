@@ -52,7 +52,7 @@
           type="checkbox"
           class="mr-3"
           :checked="todo.completed"
-          @change="toggleComplete(todo.id)"
+          @change="toggleComplete(todo)"
         />
         <label class="text-xl">{{ todo.descricao }}</label>
       </li>
