@@ -5,14 +5,14 @@
         <input
           type="checkbox"
           :checked="todo.completed"
-          @change="toggleCheck(todo)"
+          @change="toggleComplete(todo)"
         />
         <label>{{ todo.descricao }}</label>
-        <button @click="excluirTarefa(todo.id)">deletar</button>
+        <button @click="DELETE_TASK(todo.id)">deletar</button>
       </li>
     </ul>
 
-    <button @click="excluirTudo">Deletar tudo</button>
+    <button @click="excluirTodasConcluidas">Deletar tudo</button>
   </div>
 </template>
 
@@ -26,12 +26,12 @@ export default {
     }),
   },
   methods: {
-    ...mapMutations(["setCompleted", "excluirTarefa", "excluirTarefasConcluidas"]),
-    toggleCheck(todo) {
-      this.setCompleted({ id: todo.id, completed: !todo.completed });
+    ...mapMutations(["TOGGLE_COMPLETED_TASK", "DELETE_TASK", "DELETE_ALL_COMPLETED_TASKS"]),
+    toggleComplete(todo) {
+      this.TOGGLE_COMPLETED_TASK({ id: todo.id, completed: !todo.completed });
     },
-    excluirTudo() {
-      this.excluirTarefasConcluidas();
+    excluirTodasConcluidas() {
+      this.DELETE_ALL_COMPLETED_TASKS();
     },
   },
 };

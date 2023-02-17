@@ -7,7 +7,7 @@
 
       <ul>
     <li v-for="todo in todos" :key="todo.id" class="check">
-        <input type="checkbox" :checked="todo.completed" @change="toggleCheck(todo)" />
+        <input type="checkbox" :checked="todo.completed" @change="toggleComplete(todo)" />
         <label>{{ todo.descricao }}</label>
       </li>
   </ul>
@@ -23,9 +23,9 @@ export default {
     })
   },
   methods: {
-    ...mapMutations(['setCompleted']),
-    toggleCheck(todo) {
-      this.setCompleted({ id: todo.id, completed: !todo.completed })
+    ...mapMutations(['TOGGLE_COMPLETED_TASK']),
+    toggleComplete(todo) {
+      this.TOGGLE_COMPLETED_TASK({ id: todo.id, completed: !todo.completed })
     }
   }
 }

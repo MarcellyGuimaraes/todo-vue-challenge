@@ -2,7 +2,7 @@
 <template>
   <div>
     <form @submit.prevent="adicionarTarefa">
-      <input v-model="novaTarefa" type="text" placeholder="Add details" />
+      <input v-model="newTask" type="text" placeholder="Add details" />
       <button type="submit">Add</button>
     </form>
     <ul>
@@ -10,7 +10,7 @@
         <input
           type="checkbox"
           :checked="todo.completed"
-          @change="toggleCompleted(todo.id)"
+          @change="toggleComplete(todo.id)"
         />
         <label>{{ todo.descricao }}</label>
       </li>
@@ -26,21 +26,21 @@ export default {
     ...mapState(["todos"]),
   },
   methods: {
-    ...mapMutations(["setCompleted", "addTarefa"]),
-    toggleCompleted(id) {
+    ...mapMutations(["TOGGLE_COMPLETED_TASK", "ADD_TASK"]),
+    toggleComplete(id) {
       const todo = this.todos.find((todo) => todo.id === id);
       if (todo) {
-        this.setCompleted({ id, completed: !todo.completed });
+        this.TOGGLE_COMPLETED_TASK({ id, completed: !todo.completed });
       }
     },
     adicionarTarefa() {
-      if (this.novaTarefa) {
-        this.addTarefa({
+      if (this.newTask) {
+        this.ADD_TASK({
           id: this.todos.length + 1,
-          descricao: this.novaTarefa,
+          descricao: this.newTask,
           completed: false,
         });
-        this.novaTarefa = "";
+        this.newTask = "";
       }
     },
   },
