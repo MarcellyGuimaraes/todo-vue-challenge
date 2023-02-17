@@ -22,6 +22,11 @@ export default {
       todos: state => state.todos.filter(todo => !todo.completed)
     })
   },
+  data() {
+    return {
+      newTask: "",
+    };
+  },
   methods: {
     ...mapMutations(['TOGGLE_COMPLETED_TASK', 'ADD_TASK']),
     toggleComplete(todo) {

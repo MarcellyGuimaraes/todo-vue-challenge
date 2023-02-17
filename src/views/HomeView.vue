@@ -25,6 +25,11 @@ export default {
   computed: {
     ...mapState(["todos"]),
   },
+  data() {
+    return {
+      newTask: "",
+    };
+  },
   methods: {
     ...mapMutations(["TOGGLE_COMPLETED_TASK", "ADD_TASK"]),
     toggleComplete(id) {
