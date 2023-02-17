@@ -1,30 +1,31 @@
+
 <template>
+  <div>
+    <form>
+    <input type="text" placeholder="Add details" />
+    <button>Add</button>
+  </form>
 
-      <form>
-        <input type="text" placeholder="Add details"/>
-        <button>Add</button>
-      </form>
-
-      <ul>
-        <li class="check">
-          <input type="checkbox">
-          <label>Teste... 1</label>
-        </li>
-        <li class="check">
-          <input type="checkbox" checked>
-          <label>Teste... 2</label>
-        </li>
-        <li class="check">
-          <input type="checkbox">
-          <label>Teste... 3</label>
-        </li>
-      </ul>
+  <ul>
+    <li class="check" v-for="todo in todos" :key="todo.id">
+      <input type="checkbox" :checked="todo.completed" />
+      <label>{{ todo.descricao }}</label>
+    </li>
+  </ul>
+  </div>
 </template>
 
 <script>
+import {todos} from "../components/data";
+
 export default {
-  name: 'HelloWorld',
-}
+  name: "HelloWorld",
+  data() {
+    return {
+      todos: todos,
+    };
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -45,6 +46,6 @@ a {
 }
 
 .check {
-  display: block
+  display: block;
 }
 </style>

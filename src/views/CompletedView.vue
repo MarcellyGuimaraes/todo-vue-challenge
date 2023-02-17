@@ -1,19 +1,42 @@
 <template>
   <div class="about">
-      <form>
-        <input type="text" placeholder="Add details"/>
-        <button>Add</button>
-      </form>
+    <ul>
+      <li class="check" v-for="todo in incompleteTodos" :key="todo.id">
+        <input
+          type="checkbox"
+          :checked="todo.completed"
+          @change="updateTodoStatus(todo)"
+        />
+        <label>{{ todo.descricao }}</label>
+        <button>Deletar</button>
+      </li>
+    </ul>
 
-      <ul>
-        <li class="check">
-          <input type="checkbox" checked>
-          <label>Teste... 2</label>
-        </li>
-      </ul>
+    <button>Deletar tudo</button>
   </div>
 </template>
 
+<script>
+import { todos } from "../components/data";
+
+export default {
+  data() {
+    return {
+      todos: todos,
+    };
+  },
+  computed: {
+    incompleteTodos() {
+      return this.todos.filter((todo) => todo.completed);
+    },
+  },
+  methods: {
+    updateTodoStatus(todo) {
+      todo.completed = !todo.completed;
+    },
+  },
+};
+</script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
@@ -32,6 +55,6 @@ a {
 }
 
 .check {
-  display: block
+  display: block;
 }
 </style>
