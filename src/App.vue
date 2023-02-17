@@ -1,8 +1,8 @@
 <template>
   <div class="h-screen flex flex-col items-center">
     <h1 class="font-bold text-4xl mt-6 mb-12">#todo</h1>
-    <nav class="p-8 border-b w-3/4">
-      <ul class="flex items-center justify-evenly">
+    <nav class="p-8 border-b w-full md:w-3/4">
+      <ul class="flex items-center text-sm justify-evenly">
         <li><router-link class="px-12" to="/">All</router-link></li>
         <li><router-link class="px-12" to="/active">Active</router-link></li>
         <li>
